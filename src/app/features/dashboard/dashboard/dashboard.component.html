@@ -1,0 +1,98 @@
+<div class="dashboard-container">
+  <div class="welcome-section">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Welcome to StockTrade Simulator</mat-card-title>
+        <mat-card-subtitle>Your virtual stock trading platform</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Start trading with $100,000 in virtual cash. Buy and sell stocks, track your portfolio performance, and practice your trading strategies without risking real money.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/stocks">Browse Stocks</button>
+        <button mat-raised-button color="accent" routerLink="/portfolio">View Portfolio</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="market-overview">
+    <h2>Market Overview</h2>
+    <div class="stock-grid">
+      <mat-card *ngFor="let stock of stocks" class="stock-card" [ngClass]="{'positive': stock.change > 0, 'negative': stock.change < 0}">
+        <mat-card-header>
+          <mat-card-title>{{ stock.symbol }}</mat-card-title>
+          <mat-card-subtitle>{{ stock.companyName }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stock-price">
+            <span class="price">${{ stock.price.toFixed(2) }}</span>
+            <span class="change" [ngClass]="{'positive': stock.change > 0, 'negative': stock.change < 0}">
+              {{ stock.change > 0 ? '+' : '' }}{{ stock.change.toFixed(2) }} ({{ stock.changePercent.toFixed(2) }}%)
+            </span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button [routerLink]="['/stocks', stock.symbol]">Details</button>
+          <button mat-button (click)="addToWatchlist(stock.symbol)">Add to Watchlist</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-cards">
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar>search</mat-icon>
+          <mat-card-title>Find Stocks</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Search for stocks by symbol or company name</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/stocks">Search</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar>account_balance_wallet</mat-icon>
+          <mat-card-title>Portfolio</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>View your current holdings and performance</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/portfolio">View Portfolio</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar>visibility</mat-icon>
+          <mat-card-title>Watchlist</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Track stocks you're interested in</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/watchlist">View Watchlist</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar>article</mat-icon>
+          <mat-card-title>Market News</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Stay updated with the latest market news</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/news">Read News</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

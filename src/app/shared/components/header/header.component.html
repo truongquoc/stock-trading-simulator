@@ -1,0 +1,42 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">
+        <h1>StockTrade</h1>
+      </a>
+    </div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/stocks" routerLinkActive="active">Stocks</a></li>
+        <li><a routerLink="/portfolio" routerLinkActive="active">Portfolio</a></li>
+        <li><a routerLink="/watchlist" routerLinkActive="active">Watchlist</a></li>
+        <li><a routerLink="/news" routerLinkActive="active">News</a></li>
+      </ul>
+    </nav>
+    <div class="user-menu">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+        <mat-icon>account_circle</mat-icon>
+        <span>Account</span>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <ng-container *ngIf="!isAuthenticated; else loggedInMenu">
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
+        </button>
+        <button mat-menu-item routerLink="/register">
+          <mat-icon>person_add</mat-icon>
+          <span>Register</span>
+        </button>
+      </ng-container>
+      <ng-template #loggedInMenu>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </ng-template>
+      </mat-menu>
+    </div>
+  </div>
+</header>
